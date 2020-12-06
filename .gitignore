@@ -1,0 +1,12 @@
+# intellij
+.idea/
+*.iml
+# elm-package generated files
+elm-stuff
+# elm-repl generated files
+repl-temp-*
+index.html
+elm.js
+elm.min.js
+# vim
+*.swp
