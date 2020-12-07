@@ -1013,8 +1013,38 @@ suite =
     describe "Day 4 Tests"
         [ describe "Part 1"
             [ test "Example 1" <|
-                \_ -> example1 |> parseRecords |> List.filter isValid |> List.length |> equal 2
+                \_ -> example1 |> String.split "\n\n" |> List.map parseRecordSimple |> List.filter isValidSimple |> List.length |> equal 2
             , test "Part 1 Problem" <|
-                \_ -> problem |> parseRecords |> List.filter isValid |> List.length |> equal 222
+                \_ -> problem |> String.split "\n\n" |> List.map parseRecordSimple |> List.filter isValidSimple |> List.length |> equal 222
+            ]
+        , describe "Part 2"
+            [ test "Example byr validation valid" <|
+                \_ -> "2002" |> parseByr |> equal (Just 2002)
+            , test "Example byr validation invalid" <|
+                \_ -> "2003" |> parseByr |> equal Nothing
+            , test "Example hgt validation valid 1" <|
+                \_ -> "60in" |> parseHgt |> equal (Just ( 60, Inch ))
+            , test "Example hgt validation valid 2" <|
+                \_ -> "190cm" |> parseHgt |> equal (Just ( 190, Cm ))
+            , test "Example hgt validation invalid 1" <|
+                \_ -> "190in" |> parseHgt |> equal Nothing
+            , test "Example hgt validation invalid 2" <|
+                \_ -> "190" |> parseHgt |> equal Nothing
+            , test "Example hcl validation valid" <|
+                \_ -> "#123abc" |> parseHcl |> equal (Just "#123abc")
+            , test "Example hcl validation invalid 1" <|
+                \_ -> "#123abz" |> parseHcl |> equal Nothing
+            , test "Example hcl validation invalid 2" <|
+                \_ -> "123abc" |> parseHcl |> equal Nothing
+            , test "Example ecl validation valid" <|
+                \_ -> "brn" |> parseEcl |> equal (Just "brn")
+            , test "Example ecl validation invalid" <|
+                \_ -> "wat" |> parseEcl |> equal Nothing
+            , test "Example pid validation valid" <|
+                \_ -> "000000001" |> parsePid |> equal (Just "000000001")
+            , test "Example pid validation invalid" <|
+                \_ -> "0123456789" |> parsePid |> equal Nothing
+            , test "Part 2 Problem" <|
+                \_ -> problem |> String.split "\n\n" |> List.map parseRecord |> List.filter isValid |> List.length |> equal 140
             ]
         ]
