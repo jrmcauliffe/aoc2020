@@ -614,13 +614,16 @@ vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags."""
 
-example2 = """shiny gold bags contain 2 dark red bags.
+
+example2 =
+    """shiny gold bags contain 2 dark red bags.
 dark red bags contain 2 dark orange bags.
 dark orange bags contain 2 dark yellow bags.
 dark yellow bags contain 2 dark green bags.
 dark green bags contain 2 dark blue bags.
 dark blue bags contain 2 dark violet bags.
 dark violet bags contain no other bags."""
+
 
 suite : Test
 suite =
@@ -637,6 +640,6 @@ suite =
             , test "Example 2" <|
                 \_ -> example2 |> String.split "\n" |> List.filterMap parseBagRule |> insideCount "shiny gold" |> equal 126
             , test "Part 2 Problem" <|
-                \_ -> problem |> String.split "\n" |> List.filterMap parseBagRule |> insideCount "shiny gold" |> equal 777
+                \_ -> problem |> String.split "\n" |> List.filterMap parseBagRule |> insideCount "shiny gold" |> equal 89084
             ]
         ]
