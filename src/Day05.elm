@@ -3,6 +3,7 @@ module Day05 exposing (..)
 import Binary exposing (fromIntegers, toDecimal)
 
 
+
 -- https://adventofcode.com/2020/day/5
 -- Binary Boarding
 
