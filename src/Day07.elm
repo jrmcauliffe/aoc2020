@@ -4,9 +4,8 @@ module Day07 exposing (..)
 -- Bag nonsense
 
 type alias Bag = String
-type alias BagRule = (Bag, List (Int, Bag))
-
-
+type alias BagContents = List (Int, Bag)
+type alias BagRule = (Bag, BagContents )
 
 parseSubRule : String -> Maybe (Int, Bag)
 parseSubRule s = let
@@ -25,17 +24,24 @@ parseBagRule s =
    bagName |> Maybe.map (\name -> (name, bagContents))
 
 
-insideCount : Bag -> List BagRule -> Int
-insideCount b bl = 0
-
-
-
-allInside :  Bag -> List BagRule  -> List Bag
+allInside :  Bag -> List BagRule -> BagContents
 allInside b br =
     case br |> List.filter (\x -> Tuple.first x == b) of
-    (_, x) :: [] -> x |> List.map (\y -> Tuple.second y ++ (allInside (Tuple.second y) br) )
+    (_, x) :: [] -> x |> List.map (\y -> [y] ++ (allInside (Tuple.second y) br) ) |> List.foldr (++) []
     _ -> []
 
+countInside :  Bag -> List BagRule  -> Int
+countInside b br =
+    case br |> List.filter (\x -> Tuple.first x == b) of
+    (_, x) :: [] -> x |> List.map (\y -> Tuple.first y + (countInside (Tuple.second y) br) ) |> List.sum
+    _ -> 0
+
+
+containsCount : Bag -> List BagRule -> Int
+containsCount b bl = bl |> List.map (\x -> allInside (Tuple.first x) bl) |> List.filter (\l -> l |> List.map Tuple.second |> List.member b) |> List.length
+
+insideCount : Bag -> List BagRule -> Int
+insideCount b bl = bl |> countInside b
 
 example = """light red bags contain 1 bright white bag, 2 muted yellow bags.
 dark orange bags contain 3 bright white bags, 4 muted yellow bags.
@@ -46,3 +52,4 @@ dark olive bags contain 3 faded blue bags, 4 dotted black bags.
 vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags."""
+
