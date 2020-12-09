@@ -46,8 +46,11 @@ parseInstruction s =
             Nothing
 
 
+
 -- Execute the instruction pointed to by the pc, update the pc and acc
 -- if we ever run an already run instruction, halt
+
+
 run : State -> State
 run s =
     if s.prev |> List.member s.pc then
@@ -67,9 +70,13 @@ run s =
             Nothing ->
                 s
 
+
+
 -- One JMP or NOP instruction is switched and there is only one solution that advances pc past the end of memory
 -- At each JMP or NOP, try both instructions, tracking the change with .altered (only one instruction is corrupted)
 -- Only one of the two should be not Nothing given the constraints, so combine with Maybe.Extra |> orElse
+
+
 run2 : State -> Maybe State
 run2 s =
     if s.prev |> List.member s.pc then
@@ -101,4 +108,3 @@ run2 s =
 
             ( _, Nothing ) ->
                 Nothing
-

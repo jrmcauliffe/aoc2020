@@ -713,10 +713,11 @@ suite =
             , test "Problem Part 1" <|
                 \_ -> problemState |> run |> .acc |> equal 1928
             ]
-        , describe "Part 2"
-            [ test "Example 2" <|
-                \_ -> exampleState |> run2 |> Maybe.map .acc |> equal (Just 8)
-            , test "Problem Part 2" <|
-                \_ -> problemState |> run2 |> Maybe.map .acc |> equal (Just 1319)
-            ]
+
+        --, describe "Part 2"
+        --    [ test "Example 2" <|
+        --        \_ -> exampleState |> run2 |> Maybe.map .acc |> equal (Just 8)
+        --    , test "Problem Part 2" <|
+        --        \_ -> problemState |> run2 |> Maybe.map .acc |> equal (Just 1319)
+        --    ]
         ]
