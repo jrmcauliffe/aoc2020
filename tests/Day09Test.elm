@@ -1,6 +1,5 @@
 module Day09Test exposing (..)
 
-import Array
 import Day09 exposing (..)
 import Expect exposing (equal)
 import List exposing (filterMap)

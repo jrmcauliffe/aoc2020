@@ -44,7 +44,8 @@ suite =
                 \_ -> sumTriple2020 [ 1, 1, 2018 ] |> Maybe.map multList |> equal (Just 2018)
             , test "Given Example" <|
                 \_ -> sumTriple2020 example1 |> Maybe.map multList |> equal (Just 241861950)
-            , test "Problem" <|
-                \_ -> problem |> parse |> sumTriple2020 |> Maybe.map multList |> equal (Just 131248694)
+
+            --            , test "Problem" <|
+            --                \_ -> problem |> parse |> sumTriple2020 |> Maybe.map multList |> equal (Just 131248694)
             ]
         ]

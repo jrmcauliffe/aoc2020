@@ -1,6 +1,6 @@
 module Day09 exposing (..)
 
--- https://adventofcode.com/2020/day/8
+-- https://adventofcode.com/2020/day/9
 -- Encoding Error
 
 import Maybe.Extra exposing (..)
